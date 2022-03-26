@@ -1,11 +1,34 @@
 import './App.css';
+import Home from './components/Home';
+import Navbar from './components/Navbar';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+import Courses from './components/Courses';
+import AddCourse from "./components/AddCourse";
+import Course from "./components/Course";
+import NotFound from "./components/404";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {CourseState} from './contexts/coursecontext';
+import UpdateCourse from './components/updateCourse';
 
 function App() {
   return (
-    <div className="h-screen bg-gray-800 flex justify-center items-center flex-col">
-    <p className="text-4xl text-red-400">Hello World!</p>
-    <a href="https://reactjs.org/docs/getting-started.html" target="__blank" className="text-2xl underline text-sky-400 mt-2">Getting Started With React!</a>
-    </div>
+    <CourseState>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/addcourse" element={<AddCourse />} />
+          <Route exact path="/Home" element={<Home />} />
+          <Route exact path="/SignIn" element={<SignIn />} />
+          <Route exact path="/SignUp" element={<SignUp />} />
+          <Route exact path="/Courses" element={<Courses />} />
+          <Route exact path="/Courses/:name" element={<Course />} />
+          <Route exact path="/updateCourse/:id" element={<UpdateCourse />} />
+          <Route exact path="*" element={<NotFound/>} />
+        </Routes>
+      </Router>
+    </CourseState>
   );
 }
 
