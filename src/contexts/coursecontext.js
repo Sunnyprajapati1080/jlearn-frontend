@@ -37,7 +37,7 @@ const CourseState = (props) => {
             body: JSON.stringify(updatedCourse)
         })
     }
-    const deleteCourse = async(id) => {
+    const deleteCourse = async (id) => {
         await fetch(`http://localhost:8000/api/courses/deleteCourse/${id}`, {
             method: "DELETE",
             headers: {
@@ -47,8 +47,14 @@ const CourseState = (props) => {
         })
         getAllCourses()
     }
+    const findCourse = (givencourse) => {
+        const foundcourse = courses.filter((course) => {
+            return course.title.replaceAll(" ", "-") === givencourse.name
+        })
+        return foundcourse
+    }
     return (
-        <courseContext.Provider value={{ courses, createCourse, updateCourse, deleteCourse, getAllCourses }}>
+        <courseContext.Provider value={{ courses, createCourse, updateCourse, deleteCourse, getAllCourses ,findCourse}}>
             {props.children}
         </courseContext.Provider>
     )

@@ -5,21 +5,21 @@ import courseContext from "../contexts/coursecontext"
 const Course = () => {
   const givencourse = useParams()
   const context = useContext(courseContext)
-  const course = context.courses.filter((course) => {
-    return course.title.replaceAll(" ", "-") === givencourse.name
-  })
 
-  const handleOnSave =(e)=>{
+  const course = context.findCourse(givencourse)
+
+  const handleOnSave = (e) => {
     const note = e.target.previousSibling.value
-    context.updateCourse(course[0]._id,{
-      title:course[0].title,
-      note:note,
-      desc:course[0].desc,
-      imgUrl:course[0].imgUrl,
-      videoUrl:course[0].videoUrl
+    context.updateCourse(course[0]._id, {
+      title: course[0].title,
+      note: note,
+      desc: course[0].desc,
+      imgUrl: course[0].imgUrl,
+      videoUrl: course[0].videoUrl
     })
   }
   const setIframe = () => {
+    console.log(course)
     return { __html: `${course[0].videoUrl}` }
   }
   return (

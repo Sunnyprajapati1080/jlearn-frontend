@@ -1,3 +1,4 @@
+import jsCookie from 'js-cookie'
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -15,6 +16,7 @@ const SignIn = () => {
     const resjson = await res.json()
     if (resjson.token !== undefined) {
       localStorage.setItem("token", resjson.token)
+      jsCookie.set("token",resjson.token)
       navigate("/Home")
     }
     else {
